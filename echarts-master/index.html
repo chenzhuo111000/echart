@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海王英雄角色關係圖</title>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        #chart-container {
+            width: 100%;
+            height: 800px;
+        }
+    </style>
+</head>
+<body>
+    <div id="chart-container"></div>
+    <script>
+        const chartDom = document.getElementById('chart-container');
+        const myChart = echarts.init(chartDom);
+
+        const option = {
+            title: {
+                text: '海王英雄角色關係圖'
+            },
+            tooltip: {
+                formatter: function(params) {
+                    if (params.dataType === 'edge') {
+                        return `${params.data.source} 與 ${params.data.target} 的${params.data.name}`;
+                    }
+                    return `${params.name}\n陣營：${params.data.category}`;
+                }
+            },
+            legend: {
+                data: [
+                    {name: '神族'},
+                    {name: '人族', itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {name: '妖族'},
+                    {name: '獸族'}
+                ]
+            },
+            series: [{
+                type: 'graph',
+                layout: 'force',
+                animation: true,
+                draggable: true,
+                itemStyle: {
+                    borderWidth: 2,
+                    borderColor: '#fff'
+                },
+                label: {
+                    show: true,
+                    position: 'right',
+                    fontSize: 12,
+                    fontWeight: 'normal',
+                    distance: 5
+                },
+                data: [
+                    // 神族 (1-7)
+                    {id: '1', name: '哪吒', category: '神族', symbolSize: 40},
+                    {id: '2', name: '李靖', category: '神族', symbolSize: 40},
+                    {id: '3', name: '楊戩', category: '神族', symbolSize: 40},
+                    {id: '4', name: '太上老君', category: '神族', symbolSize: 40},
+                    {id: '5', name: '元始天尊', category: '神族', symbolSize: 40},
+                    {id: '6', name: '女媧', category: '神族', symbolSize: 40},
+                    {id: '7', name: '伏羲', category: '神族', symbolSize: 40},
+                    // 人族 (8-14)
+                    {id: '8', name: '姜子牙', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {id: '9', name: '申公豹', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {id: '10', name: '蘇妲己', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {id: '11', name: '項羽', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {id: '12', name: '虞姬', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {id: '13', name: '韓信', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    {id: '14', name: '暗影', category: '人族', symbolSize: 40, itemStyle: {color: 'rgba(138, 43, 226, 0.8)'}},
+                    // 妖族 (15-20)
+                    {id: '15', name: '九尾狐妖', category: '妖族', symbolSize: 40},
+                    {id: '16', name: '石磯', category: '妖族', symbolSize: 40},
+                    {id: '17', name: '孫悟空', category: '妖族', symbolSize: 40},
+                    {id: '18', name: '豬八戒', category: '妖族', symbolSize: 40},
+                    {id: '19', name: '白骨精', category: '妖族', symbolSize: 40},
+                    {id: '20', name: '琵琶精', category: '妖族', symbolSize: 40},
+                    // 獸族
+                    {id: '21', name: '饕餮', category: '獸族', symbolSize: 40, itemStyle: {color: 'rgba(50, 205, 50, 0.8)'}},
+                    {id: '22', name: '鯤鵬', category: '獸族', symbolSize: 40, itemStyle: {color: 'rgba(50, 205, 50, 0.8)'}},
+                    {id: '23', name: '白澤', category: '獸族', symbolSize: 40, itemStyle: {color: 'rgba(50, 205, 50, 0.8)'}},
+                    {id: '24', name: '四不像', category: '獸族', symbolSize: 40, itemStyle: {color: 'rgba(50, 205, 50, 0.8)'}},
+                    {id: '25', name: '哮天犬', category: '獸族', symbolSize: 40, itemStyle: {color: 'rgba(50, 205, 50, 0.8)'}},
+                    {id: '26', name: '九色鹿', category: '獸族', symbolSize: 40, itemStyle: {color: 'rgba(50, 205, 50, 0.8)'}}
+                ],
+                categories: [
+                    {name: '神族'},
+                    {name: '人族'},
+                    {name: '妖族'},
+                    {name: '獸族'}
+                ],
+                force: {
+                    repulsion: 800,
+                    edgeLength: 200,
+                    gravity: 0.2,
+                    layoutAnimation: true,
+                    friction: 0.6
+                },
+                lineStyle: {
+                    width: 2,
+                    curveness: 0.3
+                },
+                edges: [
+                    // 哪吒的羈絆關係
+                    {source: '1', target: '2', value: 1, name: '父子羈絆', 
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '父子羈絆'}},
+                    {source: '1', target: '3', value: 1, name: '戰友羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '戰友羈絆'}},
+                    {source: '1', target: '15', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+                    
+                    // 李靖的羈絆關係
+                    {source: '2', target: '8', value: 1, name: '同盟羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '同盟羈絆'}},
+                    {source: '2', target: '15', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+                    
+                    // 楊戩的羈絆關係
+                    {source: '3', target: '8', value: 1, name: '師徒羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '師徒羈絆'}},
+                    {source: '3', target: '25', value: 1, name: '忠誠羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '忠誠羈絆'}},
+
+                    // 太上老君的羈絆關係
+                    {source: '4', target: '5', value: 1, name: '同門羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '同門羈絆'}},
+                    {source: '4', target: '8', value: 1, name: '指導羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '指導羈絆'}},
+
+                    // 元始天尊的羈絆關係
+                    {source: '5', target: '8', value: 1, name: '師徒羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '師徒羈絆'}},
+                    {source: '5', target: '9', value: 1, name: '叛徒羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '叛徒羈絆'}},
+
+                    // 女媧與伏羲的羈絆
+                    {source: '6', target: '7', value: 1, name: '兄妹羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '兄妹羈絆'}},
+
+                    // 姜子牙的羈絆關係
+                    {source: '8', target: '9', value: 1, name: '對立羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '對立羈絆'}},
+                    {source: '8', target: '10', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+                    {source: '8', target: '24', value: 1, name: '忠誠羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '忠誠羈絆'}},
+
+                    // 項羽與虞姬的羈絆
+                    {source: '11', target: '12', value: 1, name: '情侶羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '情侶羈絆'}},
+
+                    // 項羽與韓信的羈絆
+                    {source: '11', target: '13', value: 1, name: '對手羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '對手羈絆'}},
+
+                    // 九尾狐妖的羈絆關係
+                    {source: '15', target: '10', value: 1, name: '共生羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '共生羈絆'}},
+                    {source: '15', target: '5', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+
+                    // 孫悟空的羈絆關係
+                    {source: '17', target: '18', value: 1, name: '隊友羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '隊友羈絆'}},
+                    {source: '17', target: '19', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+                    {source: '17', target: '20', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+
+                    // 豬八戒的羈絆關係
+                    {source: '18', target: '19', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+                    {source: '18', target: '20', value: 1, name: '敵對羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '敵對羈絆'}},
+
+                    // 山海神獸之間的羈絆
+                    {source: '23', target: '21', value: 1, name: '山海神獸羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '山海神獸羈絆'}},
+                    {source: '23', target: '22', value: 1, name: '山海神獸羈絆',
+                     lineStyle: {color: 'rgba(128, 128, 128, 0.6)', width: 2},
+                     label: {show: true, formatter: '山海神獸羈絆'}}
+                ]
+            }]
+        };
+
+        myChart.setOption(option);
+        window.addEventListener('resize', () => myChart.resize());
+    </script>
+</body>
+</html>
