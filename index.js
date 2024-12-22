@@ -31,7 +31,7 @@ $.getJSON('./sandbox.config.json', function (graph) {
       node.label = {
         show: true,
         position: 'bottom',
-        distance: 5,
+        distance: 500,
         fontSize: 14,
         color: '#333'
       };

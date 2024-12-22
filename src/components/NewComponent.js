@@ -4,7 +4,7 @@ const characterRelationships = {
   "哪吒": {
     allies: ["李靖", "楊戩"],
     counters: ["石磯", "九尾狐妖"],
-    counteredBy: ["太上老君"]
+    counteredBy: ["太上老君", "石磯"]
   },
   "李靖": {
     allies: ["哪吒", "元始天尊"],
@@ -49,7 +49,7 @@ const characterRelationships = {
   },
   "石磯": {
     allies: ["九尾狐妖"],
-    counters: ["李靖"],
+    counters: ["李靖", "哪吒"],
     counteredBy: ["楊戩", "元始天尊"]
   },
   
